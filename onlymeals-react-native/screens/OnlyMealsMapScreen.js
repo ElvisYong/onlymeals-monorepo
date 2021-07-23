@@ -66,7 +66,8 @@ const OnlyMealsMapScreen = ({ navigation }) => {
       longitudeDelta: 0.0021
     }
     navigation.navigate('FindKaki', { selectedItem, selectedRegion })
-    setRegion(region)
+    setRegion(selectedRegion)
+
   }
 
   return (
