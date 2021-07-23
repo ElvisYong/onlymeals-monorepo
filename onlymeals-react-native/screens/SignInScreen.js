@@ -12,7 +12,7 @@ const SigninScreen = ({ navigation }) => {
 
   // const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
   //   {
-  //     clientId: '795399075821-3t0a1qpj08tcmqsgsmavgk2a46ivk5r9.apps.googleusercontent.com'
+  //     clientId: ''
   //   }
   // );
 
