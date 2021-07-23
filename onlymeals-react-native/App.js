@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import firebase from './firebase/firebaseConfig';
@@ -8,7 +7,7 @@ import { NativeBaseProvider } from 'native-base';
 // Import the screens
 import SignUpScreen from './screens/SignUpScreen';
 import SignInScreen from './screens/SignInScreen';
-import OnlyMealTabBar from './components/OnlyMealsTabBar';
+import OnlyMealsTabBar from './components/OnlyMealsTabBar';
 
 
 const Stack = createStackNavigator();
@@ -32,7 +31,7 @@ export default function App() {
       <NavigationContainer>
         <AuthContext.Provider value={{ userToken, setUserToken }}>
           {userToken !== null ? (
-            <OnlyMealTabBar />
+            <OnlyMealsTabBar />
           ) : (
             <Stack.Navigator >
               <Stack.Screen name="SignIn" component={SignInScreen} />
