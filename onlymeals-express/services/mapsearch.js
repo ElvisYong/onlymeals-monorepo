@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const MapSearch = async (latitude, longitude) => {
 
-    let shopList = []
+    // let shopList = []
 
     const param1 = {
         location: latitude.toString() + ',' + longitude.toString(),
@@ -24,9 +24,10 @@ const MapSearch = async (latitude, longitude) => {
         return data
     }
 
-    let data = await fetchData();
-    shopList.push(data.results)
-    return shopList
+    return await fetchData();
+    // shopList.push(data.results)
+    // console.log(shopList + 'hi')
+    // return 
 
 }
 
