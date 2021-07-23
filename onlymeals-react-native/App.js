@@ -11,7 +11,7 @@ import OnlyMealsTabBar from './components/OnlyMealsTabBar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
-const Stack = createStackNavigator();
+export const Stack = createStackNavigator();
 
 // In an actual app we'll probably use redux or write a full reducer to do dispatching of sign in out events
 export const AuthContext = React.createContext();
