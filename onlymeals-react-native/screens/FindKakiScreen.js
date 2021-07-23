@@ -21,11 +21,15 @@ const FindKakiScreen = ({ route, navigation }) => {
   return (
     <>
       <MapView
+        pitchEnabled={false}
+        rotateEnabled={false}
+        scrollEnabled={false}
+        zoomEnabled={false}
         provider={PROVIDER_GOOGLE}
         region={region}
         onRegionChangeComplete={(region) => {
           markerRef.showCallout()
-          setRegion(region)
+          // setRegion(region)
         }}
         style={{ flex: 1, }}
       >
