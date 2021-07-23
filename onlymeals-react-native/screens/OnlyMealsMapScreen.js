@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import { Flex, VStack } from 'native-base';
 import * as Location from 'expo-location';
 
 const OnlyMealsMapScreen = ({ navigation }) => {
+  const [userLocation, setUserLocation] = useState(null);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [region, setRegion] = useState({
@@ -20,8 +21,13 @@ const OnlyMealsMapScreen = ({ navigation }) => {
         setErrorMsg('Permission to access location was denied');
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      await Location.watchPositionAsync({
+        accuracy: Location.Accuracy.BestForNavigation
+      }, (liveLocation) => setUserLocation(liveLocation))
+
+      let location = await Location.getCurrentPositionAsync()
+      setLocation(location)
+
     })();
   }, []);
 
@@ -30,20 +36,28 @@ const OnlyMealsMapScreen = ({ navigation }) => {
       let region = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 0.0522,
-        longitudeDelta: 0.0421
+        latitudeDelta: 0.0022,
+        longitudeDelta: 0.0021
       };
       setRegion(region);
     }
   }, [location])
 
+
   return (
-    <MapView
-      provider={PROVIDER_GOOGLE}
-      region={region}
-      onRegionChangeComplete={(region) => setRegion(region)}
-      style={{ flex: 1 }}
-    />
+    <>
+      <MapView
+        showsUserLocation={true}
+        provider={PROVIDER_GOOGLE}
+        region={region}
+        onRegionChangeComplete={(region) => setRegion(region)}
+        style={{ flex: 1 }}
+        userLocationUpdateInterval={500}
+      />
+      <Flex>
+
+      </Flex>
+    </>
   )
 };
 
