@@ -13,7 +13,6 @@ const OnlyMealsTabBar = ({ state, descriptors, navigation }) => {
   return (
       <Tab.Navigator>
         <Tab.Screen name="SelectEatery" component={SelectEateryScreen} />
-        <Tab.Screen name="Chat" component={ChatScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
   )

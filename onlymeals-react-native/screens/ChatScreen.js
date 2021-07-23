@@ -4,8 +4,10 @@ import { GiftedChat } from 'react-native-gifted-chat'
 import { Avatar } from 'native-base';
 import { auth, db } from '../firebase/firebaseConfig'
 
-const ChatScreen = () => {
+const ChatScreen = ({route, navigation}) => {
+    //const {roomId} = route.params.roomId
     const [messages, setMessages] = useState([]);
+
 
     /*
     useEffect(() => {
@@ -54,7 +56,7 @@ const ChatScreen = () => {
             createdAt,
             text,
             user,
-            roomId: 124
+            roomId: roomId 
         })
     }, [])
 
