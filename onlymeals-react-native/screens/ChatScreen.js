@@ -12,7 +12,7 @@ const ChatScreen = () => {
       setMessages([
         {
           _id: 1,
-          text: 'Hello developer',
+          text: 'Hello guy',
           createdAt: new Date(),
           user: {
             _id: 2,
@@ -26,7 +26,11 @@ const ChatScreen = () => {
 
     useLayoutEffect(() => {
         const unsubscribe = db.collection('chats').orderBy('createdAt', 'desc').onSnapshot(snapshot => setMessages(
-            snapshot.docs.map(doc => ({
+            snapshot.docs
+            .filter(doc => (
+                doc.data().roomId == '124'
+            ))
+            .map(doc => ({
                 _id:doc.data()._id,
                 createdAt:doc.data().createdAt.toDate(),
                 text:doc.data().text,
@@ -49,7 +53,8 @@ const ChatScreen = () => {
             _id,
             createdAt,
             text,
-            user
+            user,
+            roomId: 124
         })
     }, [])
 
