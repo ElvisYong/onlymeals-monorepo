@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button } from 'native-base';
-import { StyleSheet, Text, View } from 'react-native';
 import { AuthContext } from '../App'
 import firebase from '../firebase/firebaseConfig';
 
