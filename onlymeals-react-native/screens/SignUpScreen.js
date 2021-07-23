@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FormControl, Input, Button, Center, Pressable, Text } from 'native-base';
 import firebase from 'firebase/app';
+import { AuthContext } from '../App'
 
 const SignupScreen = ({ navigation }) => {
+  const { setUsertoken } = useContext(AuthContext);
   // Could use formdata or smth but this will do for now
   // React-hook-forms could do it beautifully too
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const signUp = async () => {
     try {
       const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      console.log(response)
-      // navigation.navigate('SignIn');
+      let token = await response.user.getIdToken()
+      setUsertoken(token)
     } catch (err) {
-      setError(err.message);
+      console.log(err)
     }
 
   }
