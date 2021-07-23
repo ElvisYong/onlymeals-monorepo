@@ -8,6 +8,7 @@ import { NativeBaseProvider } from 'native-base';
 import SignUpScreen from './screens/SignUpScreen';
 import SignInScreen from './screens/SignInScreen';
 import OnlyMealsTabBar from './components/OnlyMealsTabBar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 const Stack = createStackNavigator();
@@ -27,20 +28,22 @@ export default function App() {
 
 
   return (
-    <NativeBaseProvider>
-      <NavigationContainer>
-        <AuthContext.Provider value={{ userToken, setUserToken }}>
-          {userToken !== null ? (
-            <OnlyMealsTabBar />
-          ) : (
-            <Stack.Navigator >
-              <Stack.Screen name="SignIn" component={SignInScreen} />
-              <Stack.Screen name="SignUp" component={SignUpScreen} />
-            </Stack.Navigator>
-          )
-          }
-        </AuthContext.Provider>
-      </NavigationContainer>
-    </NativeBaseProvider>
+    <SafeAreaProvider>
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <AuthContext.Provider value={{ userToken, setUserToken }}>
+            {userToken !== null ? (
+              <OnlyMealsTabBar />
+            ) : (
+              <Stack.Navigator >
+                <Stack.Screen name="SignIn" component={SignInScreen} />
+                <Stack.Screen name="SignUp" component={SignUpScreen} />
+              </Stack.Navigator>
+            )
+            }
+          </AuthContext.Provider>
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </SafeAreaProvider>
   );
 }
