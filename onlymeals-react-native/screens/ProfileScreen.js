@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button } from 'native-base';
 import { AuthContext } from '../App'
-/*
 import firebase from '../firebase/firebaseConfig';
-*/
 
-const MessagesScreen = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   const { setUserToken } = useContext(AuthContext)
 
   const signOut = () => {
@@ -21,4 +19,4 @@ const MessagesScreen = ({ navigation }) => {
   )
 };
 
-export default MessagesScreen;
+export default ProfileScreen;

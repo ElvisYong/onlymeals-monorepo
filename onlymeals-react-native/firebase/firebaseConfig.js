@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore'
 import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID, MEASUREMENT_ID } from '@env'
 //import "firebase/database";
 //import "firebase/firestore";
@@ -20,6 +21,13 @@ const firebaseConfig = {
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
-}
+} 
+
+const db = firebase.firestore()
+const auth = firebase.auth()
+
+export { db, auth}
+
+
 
 export default firebase
