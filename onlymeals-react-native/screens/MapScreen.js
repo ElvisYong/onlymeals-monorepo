@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Button } from 'native-base';
 import { AuthContext } from '../App'
 import firebase from '../firebase/firebaseConfig';
+import MapView from '../components/OnlyMealsMapView'
 
 const HomeScreen = ({ navigation }) => {
   const { setUserToken } = useContext(AuthContext)
@@ -15,7 +16,8 @@ const HomeScreen = ({ navigation }) => {
   }
 
   return (
-    <Button onPress={() => signOut()}>SIGN OUT</Button>
+    //<MapView />
+    <Button>TEst</Button>
   )
 };
 

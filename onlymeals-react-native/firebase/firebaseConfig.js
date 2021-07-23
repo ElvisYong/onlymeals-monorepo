@@ -8,7 +8,7 @@ import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, 
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: API_KEY,
+  apiKey: `${API_KEY}`,
   authDomain: AUTH_DOMAIN,
   // databaseURL: 'https://project-id.firebaseio.com',
   projectId: PROJECT_ID,
