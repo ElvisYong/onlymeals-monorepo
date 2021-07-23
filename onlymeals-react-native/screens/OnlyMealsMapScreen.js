@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Box, Text, FlatList, Input, Pressable, Icon, Container } from 'native-base';
+import { Box, Text, FlatList, Input, Pressable, Icon, PresenceTransition } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 
@@ -58,13 +58,14 @@ const OnlyMealsMapScreen = ({ navigation }) => {
     }
   }, [location])
 
-  const onEateryPressed = (item) => {
-    let region = {
-      latitude: item.geometry.location.lat,
-      longitude: item.geometry.location.lng,
+  const onEateryPressed = (selectedItem) => {
+    let selectedRegion = {
+      latitude: selectedItem.geometry.location.lat,
+      longitude: selectedItem.geometry.location.lng,
       latitudeDelta: 0.0022,
       longitudeDelta: 0.0021
     }
+    navigation.navigate('FindKaki', { selectedItem, selectedRegion })
     setRegion(region)
   }
 
@@ -122,7 +123,7 @@ const OnlyMealsMapScreen = ({ navigation }) => {
                 }}
                 py={8}
               >
-                <Text>{item.name}</Text>
+                <Text bold>{item.name}</Text>
                 <Text>{item.vicinity}</Text>
               </Pressable>
             </Box>
