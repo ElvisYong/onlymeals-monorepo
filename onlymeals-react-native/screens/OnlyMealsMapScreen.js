@@ -9,7 +9,7 @@ const OnlyMealsMapScreen = ({ navigation }) => {
 
   const [userLocation, setUserLocation] = useState(null);
   const [location, setLocation] = useState(null);
-  const [eateries, setEateries] = useState(null);
+  const [eateries, setEateries] = useState([]);
   const [region, setRegion] = useState({
     latitude: 1.3521,
     longitude: 103.8198,
@@ -31,6 +31,16 @@ const OnlyMealsMapScreen = ({ navigation }) => {
       let location = await Location.getCurrentPositionAsync()
       setLocation(location)
 
+      try {
+        let response = await fetch(`http://192.168.1.21:3000/location/${location.coords.latitude}/${location.coords.longitude}`, {
+          method: 'GET',
+        })
+        let data = await response.json()
+        setEateries(data.results)
+
+      } catch (err) {
+        console.log(err)
+      }
     }
 
     fetchData();
@@ -49,7 +59,13 @@ const OnlyMealsMapScreen = ({ navigation }) => {
   }, [location])
 
   const onEateryPressed = (item) => {
-    console.log(item)
+    let region = {
+      latitude: item.geometry.location.lat,
+      longitude: item.geometry.location.lng,
+      latitudeDelta: 0.0022,
+      longitudeDelta: 0.0021
+    }
+    setRegion(region)
   }
 
   return (
@@ -60,7 +76,20 @@ const OnlyMealsMapScreen = ({ navigation }) => {
         region={region}
         onRegionChangeComplete={(region) => setRegion(region)}
         style={{ flex: 1, }}
-      />
+      >
+        {
+          eateries.length !== 0 &&
+          eateries.map((item, index) =>
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: item.geometry.location.lat,
+                longitude: item.geometry.location.lng
+              }}
+            />
+          )
+        }
+      </MapView>
       <Box bg="white" flex={1}>
         <Input
           marginLeft={5}
@@ -77,19 +106,11 @@ const OnlyMealsMapScreen = ({ navigation }) => {
           InputLeftElement={<Icon size='sm' ml={2} size={5} color="gray.400" as={<Ionicons name="ios-search" />} />}
         />
         <FlatList
-          data={[{
-            name: 'My location',
-            vicinity: 'Near me',
-            place_id: '1'
-          }, {
-            name: 'Location 2',
-            vicinity: 'far',
-            place_id: '2'
-          }]} renderItem={({ item }) => (
+          data={eateries || []} renderItem={({ item }) => (
             <Box marginLeft={5} marginRight={5}>
               <Pressable
                 onPress={() => onEateryPressed(item)}
-                alignItems="center"
+                alignItems="flex-start"
                 bg="white"
                 borderBottomColor="trueGray.200"
                 borderBottomWidth={1}
