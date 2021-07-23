@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Box, Text, FlatList, Input, Pressable, Icon, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 
 const FindKakiScreen = ({ route, navigation }) => {
   const { selectedItem, selectedRegion } = route.params
+  const [markerRef, setMarkerRef] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null);
   const [location, setLocation] = useState(
     {
@@ -22,15 +23,23 @@ const FindKakiScreen = ({ route, navigation }) => {
       <MapView
         provider={PROVIDER_GOOGLE}
         region={region}
-        onRegionChangeComplete={(region) => setRegion(region)}
+        onRegionChangeComplete={(region) => {
+          markerRef.showCallout()
+          setRegion(region)
+        }}
         style={{ flex: 1, }}
       >
         <Marker
+          ref={(ref) => setMarkerRef(ref)}
           coordinate={{
             latitude: selectedItem.geometry.location.lat,
             longitude: selectedItem.geometry.location.lng
           }}
-        />
+        >
+          <Callout>
+            <Text>{selectedItem.name}</Text>
+          </Callout>
+        </Marker>
       </MapView>
       <Box bg="white" flex={1}>
         <Box marginLeft={5} marginRight={5}>
