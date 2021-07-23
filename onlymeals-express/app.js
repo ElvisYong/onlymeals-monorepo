@@ -1,11 +1,12 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
 let port = process.env.PORT || 3000;
-var indexRouter = require('./routes/index');
-var locationRouter = require('./routes/location');
+let indexRouter = require('./routes/index');
+let locationRouter = require('./routes/location');
+let cors = require('cors');
 // const mapSearch = require('./services/mapsearch');
 
 
@@ -13,6 +14,7 @@ var app = express();
 
 // view engine setup
 app.use(logger('dev'));
+app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/location', locationRouter);
