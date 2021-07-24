@@ -29,7 +29,7 @@ git clone https://github.com/ElvisYong/onlymeals-monorepo.git
 a. If you are using npm
 
 ```bash
-npmi
+npm i
 ```
 
 b. If you are using yarn
