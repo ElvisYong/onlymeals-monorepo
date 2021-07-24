@@ -32,7 +32,7 @@ const OnlyMealsMapScreen = ({ navigation }) => {
       setLocation(location)
 
       try {
-        let response = await fetch(`http://192.168.1.21:3000/location/${location.coords.latitude}/${location.coords.longitude}`, {
+        let response = await fetch(`https://onlymeals-69b1b.as.r.appspot.com/location/${location.coords.latitude}/${location.coords.longitude}`, {
           method: 'GET',
         })
         let data = await response.json()
