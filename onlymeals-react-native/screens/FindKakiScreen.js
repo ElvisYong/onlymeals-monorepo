@@ -3,6 +3,8 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Box, Text, FlatList, Input, Pressable, Icon, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
+import {auth, db} from '../firebase/firebaseConfig';
+
 
 const FindKakiScreen = ({ route, navigation }) => {
   const { selectedItem, selectedRegion } = route.params
@@ -18,6 +20,13 @@ const FindKakiScreen = ({ route, navigation }) => {
     }
   );
   const [region, setRegion] = useState(selectedRegion)
+
+  const matchmake = () => {
+    const place_id = selectedItem.place_id
+    navigation.navigate("Chat", {roomId: place_id})
+    // api call to /matchmaking/:placeId
+  }
+  
 
   return (
     <>
@@ -69,7 +78,7 @@ const FindKakiScreen = ({ route, navigation }) => {
           isCancel ? (
             <Button marginLeft={5} marginRight={5} onPress={() => { setIsCancel(false) }}>CANCEL SEARCH</Button>
           ) : (
-            <Button marginLeft={5} marginRight={5} onPress={() => {}}>FIND EATING BUDDIES</Button>
+            <Button marginLeft={5} marginRight={5} onPress={() => {matchmake()}}>FIND EATING BUDDIES</Button>
           )
         }
       </Box>

@@ -5,7 +5,7 @@ import { Avatar } from 'native-base';
 import { auth, db } from '../firebase/firebaseConfig'
 
 const ChatScreen = ({route, navigation}) => {
-    //const {roomId} = route.params.roomId
+    const roomId = route.params.roomId
     const [messages, setMessages] = useState([]);
 
 
@@ -30,7 +30,7 @@ const ChatScreen = ({route, navigation}) => {
         const unsubscribe = db.collection('chats').orderBy('createdAt', 'desc').onSnapshot(snapshot => setMessages(
             snapshot.docs
             .filter(doc => (
-                doc.data().roomId == '124'
+                doc.data().roomId == roomId
             ))
             .map(doc => ({
                 _id:doc.data()._id,
