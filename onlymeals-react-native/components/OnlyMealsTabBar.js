@@ -27,7 +27,6 @@ const OnlyMealsTabBar = ({ state, descriptors, navigation }) => {
               ? 'person-circle'
               : 'person-circle-outline'
           }
-          console.log(iconName)
 
           return <Ionicons name={iconName} size={size} color={color} />;
         }
