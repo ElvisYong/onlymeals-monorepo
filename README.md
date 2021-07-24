@@ -1,5 +1,3 @@
-# onlymeals-monorepo
-
 # Miss face-to-face? Just choose a place!
 
 ## Overview
