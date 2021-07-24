@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { FormControl, Button, Input, Text, Center, Pressable } from 'native-base';
+import { FormControl, Button, Input, Text, Center, Pressable, Icon } from 'native-base';
 import firebase from 'firebase/app';
 import * as Google from 'expo-auth-session/providers/google';
 import { AuthContext } from '../App'
+import { MaterialIcons } from "@expo/vector-icons"
 
 const SigninScreen = ({ navigation }) => {
   const { setUserToken } = useContext(AuthContext);
@@ -40,6 +41,19 @@ const SigninScreen = ({ navigation }) => {
       <FormControl isRequired>
         <FormControl.Label>Email</FormControl.Label>
         <Input
+          InputLeftElement={
+            <Icon
+              as={<MaterialIcons name="email" />}
+              size="md"
+              m={2}
+            _light={{
+              color: "black",
+            }}
+            _dark={{
+              color: "gray.300",
+            }}
+            />
+          }
           placeholder="email"
           value={email}
           onChangeText={(text) => setEmail(text)}
@@ -48,6 +62,19 @@ const SigninScreen = ({ navigation }) => {
       <FormControl isRequired>
         <FormControl.Label>Password</FormControl.Label>
         <Input
+          InputLeftElement={
+            <Icon
+              as={<MaterialIcons name="lock" />}
+              size="md"
+              m={2}
+            _light={{
+              color: "black",
+            }}
+            _dark={{
+              color: "gray.300",
+            }}
+            />
+          }
           type="password"
           value={password}
           onChangeText={(text) => setPassword(text)}
