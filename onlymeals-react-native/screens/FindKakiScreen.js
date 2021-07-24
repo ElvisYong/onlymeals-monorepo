@@ -7,6 +7,7 @@ import * as Location from 'expo-location';
 const FindKakiScreen = ({ route, navigation }) => {
   const { selectedItem, selectedRegion } = route.params
   const [markerRef, setMarkerRef] = useState(null)
+  const [isCancel, setIsCancel] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [location, setLocation] = useState(
     {
@@ -64,7 +65,13 @@ const FindKakiScreen = ({ route, navigation }) => {
             <Text>{selectedItem.vicinity}</Text>
           </Pressable>
         </Box>
-        <Button marginLeft={5} marginRight={5}>FIND EATING BUDDIES</Button>
+        {
+          isCancel ? (
+            <Button marginLeft={5} marginRight={5} onPress={() => { setIsCancel(false) }}>CANCEL SEARCH</Button>
+          ) : (
+            <Button marginLeft={5} marginRight={5} onPress={() => {}}>FIND EATING BUDDIES</Button>
+          )
+        }
       </Box>
     </>
   )

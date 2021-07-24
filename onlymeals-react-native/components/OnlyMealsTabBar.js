@@ -17,7 +17,7 @@ const OnlyMealsTabBar = ({ state, descriptors, navigation }) => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "SelectEatery") {
+          if (route.name === "Select Eatery") {
             iconName = focused
               ? 'map'
               : 'map-outline'
@@ -32,7 +32,7 @@ const OnlyMealsTabBar = ({ state, descriptors, navigation }) => {
         }
       })}
     >
-      <Tab.Screen name="SelectEatery" component={SelectEateryScreen} />
+      <Tab.Screen name="Select Eatery" component={SelectEateryScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator >
   )
